@@ -1,0 +1,177 @@
+<!--  thanks to albancho -->
+<!-- Erstellt von Johannes -->
+<!--Quellen: 
+https://wiki.selfhtml.org/wiki/HTML/Tutorials/Formulare/Auswahllisten 
+http://www-hera-b.desy.de/subgroup/computing/IT/www/selfhtml/html/frames/anzeige/iframe_verweise.htm
+-->
+
+<html>
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <title>Gruppen-Work-Space</title>
+  </head>
+<!-- Layout -->
+<head>
+  <style>
+    body {
+      background-color: #838383;
+      margin: 0em;
+      padding: 0em;
+      width: 100%;
+  height: 100%;
+  font-size: larger;
+    }
+   
+    .iframe {
+      border: medium dashed rgb(253, 93, 0);
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<!-- Layout -->
+<body> 
+    <label>Gruppenraum: </label>
+        <a id="Gruppenraum-nr" >nicht zugewiesen</a>
+        <a >     - verbleibende Bearbeitungszeit: </a>
+        <a id="Timer" align="right">timer noch nicht gestartet</a>
+        <details open>
+            <summary>Talk</summary>
+            <div>
+            <iframe ID='Videocall' src=""
+            alt="nicht zugewiesen"
+            name="jitsiConferenceFrame1"
+            allow="camera; microphone; display-capture"
+            allowfullscreen="true" 
+            width="99%"
+            height="40%"
+            scrolling="yes">
+        </iframe>
+        </div>
+        </details>
+        <div class="iframe">
+        <details open>
+            <summary>Antwortsheet</summary>
+            <iframe ID="Calculation" src=""
+            alt="nicht zugewiesen"
+            width="99%"
+            height="54%"
+            frameborder="none"
+            seamless="seamless"
+            allowfullscreen="true"
+            scrolling="yes"></iframe>
+          </details>
+        </div> 
+          <details>
+            <summary>Draw</summary>
+            <iframe ID="Drawing" src=""
+            alt="nicht zugewiesen"
+            width="99%"
+            height="54%"
+            frameborder="none"
+            allowfullscreen="true"
+            scrolling="yes"
+          ></iframe>
+        </details>
+          <details open>
+            <summary>Doc</summary>
+            <iframe ID="Documentation" src=""
+            alt="nicht zugewiesen"
+            width="100%"
+            height="54%"
+            frameborder="none"
+            seamless="seamless"
+            allowfullscreen="true"
+            scrolling="yes"
+          ></iframe>
+        </details>
+                
+</body>
+
+<!-- Parameter aus URL -->
+<script type="text/javascript">  
+    function Werteliste (querystring) { //Parameterliste aus Url nach dem ? extrahieren syntax ist ?Parametername0=Wert0&Parametername1=Wert1
+      if (querystring == '') return;
+      var wertestring = querystring.slice(1);
+      var paare = wertestring.split("&");
+      var paar, name, wert;
+      for (var i = 0; i < paare.length; i++) {
+        paar = paare[i].split("=");
+        name = paar[0];
+        wert = paar[1];
+        name = unescape(name).replace("+", " ");
+        wert = unescape(wert).replace("+", " ");
+        this[name] = wert;
+        //alert(location.search);
+      }
+    }
+    var liste = new Werteliste(location.search);
+   
+    document.getElementById("Gruppenraum-nr").innerHTML = liste["Gruppe"];
+</script>
+
+<!-- Countdown -->
+<script>  
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="Timer"
+  document.getElementById("Timer").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("Timer").innerHTML = "Zeit ist um!!!";
+  }
+}, 1000);
+</script>
+
+<!-- Zuweisen der iframes mit entsprechenden URLs  -->
+<script>
+//Array in dem der Raumnahme des Jit-talk ist und die Google ID der Bearbeitungsdateien
+    var Arr_Gruppe = [["Main","1w4ROhRZfNN1Opc2TUWt-lrFF6KurtHq9avL8fELNBqY",	"1F5yftZSjCIlx2jUVaw8XdSEgw0yizEgZkoXdX6traBM",	"1iFJ9xXESJN8E2vRwjRzYpU7MNqmhSqhvHwdc4OxAl2k"],
+     ["Gruppe1", "1XuPaRVN9HAbq9syvs88oqGV0Y2eYB42DdyD76s_uGXI","1sep8iWGDD1xeCBfIusqIhlUidYAwi64VFOhLN8edsrs",	"1zqTCsYB2rb7ApKx5OF4t_Rs436k0ryF2Daa1ron73Hc"],
+     ["Gruppe2", "1D5zF7H18_Q-B6_JFa0MvNPmylmDlOd9WB53rgJbNeSk","1rjHUJAIoecAIIGLCL3qqpF2u9ViztW2HrBeywRbsR8k",	"11CE9CX05kluWanI19Fr-wu0jMOdd9f1b9839bXXKduY"]];
+    
+     var JitMeetingLink; //= 'https://meet.jit.si/' + Arr_Gruppe[0][0] +'-Der-Talk#config.startWithAudioMuted=false&config.startWithVideoMuted=false&config.prejoinPageEnabled=false&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false&interfaceConfig.MOBILE_APP_PROMO=false&interfaceConfig.HIDE_INVITE_MORE_HEADER=true&interfaceConfig.SHOW_BRAND_WATERMARK=false&interfaceConfig.SHOW_JITSI_WATERMARK=false&interfaceConfig.SHOW_POWERED_BY=false&interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE=false&interfaceConfig.SHOW_WATERMARK_FOR_GUESTS=false&interfaceConfig.TOOLBAR_BUTTONS=%5B%22microphone%22%2C%22camera%22%2C%22closedcaptions%22%2C%22desktop%22%2C%22fullscreen%22%2C%22fodeviceselection%22%2C%22hangup%22%2C%22profile%22%2C%22chat%22%2C%22recording%22%2C%22livestreaming%22%2C%22etherpad%22%2C%22sharedvideo%22%2C%22settings%22%2C%22raisehand%22%2C%22videoquality%22%2C%22filmstrip%22%2C%22feedback%22%2C%22stats%22%2C%22shortcuts%22%2C%22tileview%22%2C%22videobackgroundblur%22%2C%22download%22%2C%22help%22%2C%22mute-everyone%22%5D%22'
+     var DocumentLink; //
+     var CalcLink; //
+     var DrawLink; //
+
+          var ActuGruppe = 0;
+          if(typeof liste["Gruppe"] !== "undefined"){
+              ActuGruppe = liste["Gruppe"];
+          }  
+          JitMeetingLink = 'https://meet.jit.si/' + Arr_Gruppe[ActuGruppe][0] + '-Der-Talk#config.startWithAudioMuted=false&config.startWithVideoMuted=false&config.prejoinPageEnabled=false&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false&interfaceConfig.MOBILE_APP_PROMO=false&interfaceConfig.HIDE_INVITE_MORE_HEADER=true&interfaceConfig.SHOW_BRAND_WATERMARK=false&interfaceConfig.SHOW_JITSI_WATERMARK=false&interfaceConfig.SHOW_POWERED_BY=false&interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE=false&interfaceConfig.SHOW_WATERMARK_FOR_GUESTS=false&interfaceConfig.TOOLBAR_BUTTONS=%5B%22microphone%22%2C%22camera%22%2C%22closedcaptions%22%2C%22desktop%22%2C%22fullscreen%22%2C%22fodeviceselection%22%2C%22hangup%22%2C%22profile%22%2C%22chat%22%2C%22recording%22%2C%22livestreaming%22%2C%22etherpad%22%2C%22sharedvideo%22%2C%22settings%22%2C%22raisehand%22%2C%22videoquality%22%2C%22filmstrip%22%2C%22feedback%22%2C%22stats%22%2C%22shortcuts%22%2C%22tileview%22%2C%22videobackgroundblur%22%2C%22download%22%2C%22help%22%2C%22mute-everyone%22%5D%22';//'-Der-Talk#config.startWithAudioMuted=false&config.startWithVideoMuted=false&config.prejoinPageEnabled=false&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false&interfaceConfig.MOBILE_APP_PROMO=false&interfaceConfig.HIDE_INVITE_MORE_HEADER=true&interfaceConfig.SHOW_BRAND_WATERMARK=false&interfaceConfig.SHOW_JITSI_WATERMARK=false&interfaceConfig.SHOW_POWERED_BY=false&interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE=false&interfaceConfig.SHOW_WATERMARK_FOR_GUESTS=false&interfaceConfig.TOOLBAR_BUTTONS=%5B%22microphone%22%2C%22camera%22%2C%22closedcaptions%22%2C%22desktop%22%2C%22fullscreen%22%2C%22fodeviceselection%22%2C%22hangup%22%2C%22profile%22%2C%22chat%22%2C%22recording%22%2C%22livestreaming%22%2C%22etherpad%22%2C%22sharedvideo%22%2C%22settings%22%2C%22raisehand%22%2C%22videoquality%22%2C%22filmstrip%22%2C%22feedback%22%2C%22stats%22%2C%22shortcuts%22%2C%22tileview%22%2C%22videobackgroundblur%22%2C%22download%22%2C%22help%22%2C%22mute-everyone%22%5D%22';
+          CalcLink = 'https://docs.google.com/spreadsheets/d/' + Arr_Gruppe[ActuGruppe][1] + '/edit?usp=sharing';
+          DrawLink = 'https://docs.google.com/drawings/d/'+ Arr_Gruppe[ActuGruppe][2] + '/edit?usp=sharing';
+          DocumentLink = 'https://docs.google.com/document/d/'+ Arr_Gruppe[ActuGruppe][3]+ '/edit?usp=sharing';
+
+        document.getElementById("Videocall").src = JitMeetingLink;
+        document.getElementById("Calculation").src = CalcLink;
+        document.getElementById("Drawing").src = DrawLink
+        document.getElementById("Documentation").src = DocumentLink;
+        alert("Du betrittst den Gruppenraum Nr.  " + ActuGruppe); 
+
+
+
+</script>  
+
+</html>
