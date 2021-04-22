@@ -19,7 +19,7 @@ fetch(url)
             CalcLink = 'https://docs.google.com/spreadsheets/d/' + Arr_Gruppe[ActuGruppe][2] + '/edit?usp=sharing';
             DrawLink = 'https://docs.google.com/drawings/d/'+ Arr_Gruppe[ActuGruppe][3] + '/edit?usp=sharing';
             DocumentLink = 'https://docs.google.com/document/d/'+ Arr_Gruppe[ActuGruppe][4]+ '/edit?usp=sharing';
-  alert(CalcLink);
+  // alert(CalcLink);
           document.getElementById("Videocall").src = JitMeetingLink;
           document.getElementById("Calculation").src = CalcLink;
           document.getElementById("Drawing").src = DrawLink
