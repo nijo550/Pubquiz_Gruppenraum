@@ -3,6 +3,7 @@
 <!--Quellen: 
 https://wiki.selfhtml.org/wiki/HTML/Tutorials/Formulare/Auswahllisten 
 http://www-hera-b.desy.de/subgroup/computing/IT/www/selfhtml/html/frames/anzeige/iframe_verweise.htm
+https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_box-sizing2
 -->
 
 <html>
@@ -19,23 +20,109 @@ http://www-hera-b.desy.de/subgroup/computing/IT/www/selfhtml/html/frames/anzeige
       margin: 0em;
       padding: 0em;
       width: 100%;
-  height: 100%;
-  font-size: larger;
+      height: 100%;
+      font-size: larger;
     }
    
     .iframe {
       border: medium dashed rgb(253, 93, 0);
       overflow: auto;
     }
-  </style>
+    </style>
+    <style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Button used to open the chat form - fixed at the bottom of the page*/ 
+.open-button {
+  background-color: #555;
+  color: rgb(0, 0, 0);
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 100px;
+}
+
+/* The popup chat - hidden by default
+.chat-popup {
+  display: none;
+  position:fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #0a0c79;
+  z-index: 9;
+  background-color: #0a0c79;
+  height: "100%";
+  width:"100%";
+}
+
+/* Add styles to the form container
+.form-container {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  padding: 10px;
+  }
+
+*/
+
+/* Add some hover effects to buttons
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+*/
+div.container {
+  display: none;
+  position:fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 40%;
+  max-width: 500px;
+  height: 40%;
+  background-color: #838383;
+  border: 2px solid black;
+  z-index: 9;
+  opacity: 0.9;
+}
+
+div.box {
+  box-sizing: border-box;
+  width: 50%;
+  border: 5px solid red;
+  float: left;
+}
+</style>
+
+
+ <!-- </style> -->
 </head>
 
 <!-- Layout -->
 <body> 
-    <label>Gruppenraum: </label>
+  <div class="container" id="myForm" align="right">
+    <div>
+      <iframe ID='Videocall' src=""
+      alt="nicht zugewiesen"
+      name="jitsiConferenceFrame1"
+      allow="camera; microphone; display-capture"
+      allowfullscreen="true" 
+      width="100%"
+      height="90%"
+      scrolling="yes">
+    </iframe>
+    </div>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </div>
+
+  <label>Gruppenraum: </label>
         <a id="Gruppenraum-nr" >nicht zugewiesen</a>
         <a >     - verbleibende Bearbeitungszeit: </a>
         <a id="Timer" align="right">timer noch nicht gestartet</a>
+        <!--
         <details open>
             <summary>Talk</summary>
             <div>
@@ -50,6 +137,7 @@ http://www-hera-b.desy.de/subgroup/computing/IT/www/selfhtml/html/frames/anzeige
         </iframe>
         </div>
         </details>
+      -->
         <div class="iframe">
         <details open>
             <summary>Antwortsheet</summary>
@@ -86,7 +174,18 @@ http://www-hera-b.desy.de/subgroup/computing/IT/www/selfhtml/html/frames/anzeige
             scrolling="yes"
           ></iframe>
         </details>
-                
+        <button class="open-button" onclick="openForm()">Video-Chat</button>
+<!--
+        <div class="chat-popup" id="myForm">
+          
+          <form class="form-container">
+            
+            <iframe allow="camera; microphone; fullscreen" src="https://meet.jit.si/Main-Der-Talk" height = "100%" width = "100%"></iframe>
+            
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>  
+      -->                     
 </body>
 
 <!-- Parameter aus URL -->
@@ -109,6 +208,15 @@ http://www-hera-b.desy.de/subgroup/computing/IT/www/selfhtml/html/frames/anzeige
     var liste = new Werteliste(location.search);
    
     document.getElementById("Gruppenraum-nr").innerHTML = liste["Gruppe"];  
+    function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+
 </script>
 <!-- Auslesen Jit-Talk und Google ID der Dateien -> Zuweisen der iframes mit entsprechenden URLs -->
 
