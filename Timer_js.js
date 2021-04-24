@@ -1,18 +1,17 @@
-// Set the date we're counting down to
-let url ="https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec"
-let url_fun_time = url + "?fun=Get_end_time"
+let url ="https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec";
+let url_fun_time = url + "?fun=Get_end_time";
 //function testGS(){
-fetch(url_fun_time)
-    .then(d => d.json())
-    .then(d => {
-
-var endtime = "2021-04-23T17:30:45.356Z"
-
-//var endtime = "2021-04-23T17:30:45.356Z"
-var countDownDate = new Date(endtime).getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
+    fetch(url_fun_time)
+    .then(d => d.json())
+    .then(d => {
+
+//var endtime = "2021-04-23T17:30:45.356Z"
+
+var endtime = d
+var countDownDate = new Date(endtime).getTime();
 
   // Get today's date and time
   var now = new Date().getTime();
