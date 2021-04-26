@@ -1,6 +1,6 @@
 
-let url ="https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec"
-let url_fun = url + "?fun=Get_data"
+let url ="https://script.google.com/macros/s/AKfycbyAxlfLqEFMlDbA3EwarHS_THrRqks2qw3WXV82qbGuJ_EHrCHnD4NFOXMJf_GfDdPUxg/exec" //"https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec"
+        let url_fun = url + "?fun=Get_data"
 //function testGS(){
 fetch(url_fun)
     .then(Grup => Grup.json())
@@ -32,15 +32,15 @@ fetch(url_fun)
                         '%22desktop%22%2C'+
                         '%22fullscreen%22%2C'+
                         '%22fodeviceselection%22%2C'+
-                        '%22hangup%22%2C'+
+                        //'%22hangup%22%2C'+
                         '%22profile%22%2C'+
-                        '%22chat%22%2C'+
+                        //'%22chat%22%2C'+
                         //'%22recording%22%2C'+
                         //'%22livestreaming%22%2C'+
                         '%22etherpad%22%2C'+
                         //'%22sharedvideo%22%2C'+
                         '%22settings%22%2C'+
-                        '%22raisehand%22%2C'+
+                        //'%22raisehand%22%2C'+
                         '%22videoquality%22%2C'+
                         '%22filmstrip%22%2C'+
                         //'%22feedback%22%2C'+
@@ -71,7 +71,7 @@ fetch(url_fun)
 }).then(Grup => {
 //document.getElementById("btn").addEventListener("click", testGS);
 // Set the date we're counting down to
-let url ="https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec";
+//let url ="https://script.google.com/macros/s/AKfycbyAxlfLqEFMlDbA3EwarHS_THrRqks2qw3WXV82qbGuJ_EHrCHnD4NFOXMJf_GfDdPUxg/exec"//"https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec";
 let url_fun_time = url + "?fun=Get_end_time";
 //function testGS(){
 
@@ -109,7 +109,7 @@ var countDownDate = new Date(endtime).getTime();
   // If the count down is over, write some text 
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("Timer").innerHTML = d+"Zeit ist um!!!";
+    document.getElementById("Timer").innerHTML = "Die Zeit ist seit " + endtime + " um!!! Bitte kommt zurück zur Main Area!";
   }
 }, 1000);
 });
