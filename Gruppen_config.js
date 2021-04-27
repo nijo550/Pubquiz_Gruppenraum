@@ -111,6 +111,6 @@ var countDownDate = new Date(endtime).getTime();
     clearInterval(x);
     document.getElementById("Timer").innerHTML = "Die Zeit ist seit " + endtime + " um!!! Bitte kommt zurück zur Main Area!";
   }
-}, 1000);
+}, 5000);
 });
 })
