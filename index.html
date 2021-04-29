@@ -29,6 +29,7 @@ https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_box-sizing2
     .iframe {
       height: 80%;
       width: 99%;
+      display: "none";
     }
    
 
@@ -92,6 +93,7 @@ div.container {
   <div id="ASheet">
     <div>
       <iframe ID="Calculation" class="iframe" 
+      
       src=""
       style= "border: dashed; border-color: rgb(253, 93, 0);" 
       alt="nicht zugewiesen"
@@ -103,14 +105,14 @@ div.container {
   <button type="button" onclick="Z_show()">Zeichnen</button> 
   <div id="ZSheet">
     <div>
-      <iframe  ID="Drawing" class="iframe" src=""></iframe>
+      <iframe  ID="Drawing" class="iframe" src="" ></iframe>
     </div>
   </div>  
   <p></p>
   <button type="button" onclick="D_show()">Texten</button> 
   <div id="DSheet">
     <div>
-      <iframe ID="Documentation" class="iframe" src=""></iframe>
+      <iframe ID="Documentation" class="iframe" src="" ></iframe>
     </div>
   </div> 
 
@@ -122,7 +124,7 @@ div.container {
       <iframe ID='Videocall' src=""
       alt="nicht zugewiesen"
       name="jitsiConferenceFrame1"
-      allow="camera; microphone; display-capture"
+      allow="camera; microphone;"
       allowfullscreen="true" 
       width="100%"
       height="92%">
