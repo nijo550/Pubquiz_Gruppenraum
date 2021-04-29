@@ -38,5 +38,5 @@ var countDownDate = new Date(endtime).getTime();
     clearInterval(x);
     document.getElementById("Timer").innerHTML = d+"Zeit ist um!!!";
   }
-}, 1000);
+}, 10000);
 });

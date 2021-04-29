@@ -1,4 +1,5 @@
 
+          
 let url ="https://script.google.com/macros/s/AKfycbyAxlfLqEFMlDbA3EwarHS_THrRqks2qw3WXV82qbGuJ_EHrCHnD4NFOXMJf_GfDdPUxg/exec" //"https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec"
         let url_fun = url + "?fun=Get_data"
 //function testGS(){
@@ -71,7 +72,7 @@ fetch(url_fun)
 }).then(Grup => {
 //document.getElementById("btn").addEventListener("click", testGS);
 // Set the date we're counting down to
-//let url ="https://script.google.com/macros/s/AKfycbyAxlfLqEFMlDbA3EwarHS_THrRqks2qw3WXV82qbGuJ_EHrCHnD4NFOXMJf_GfDdPUxg/exec"//"https://script.google.com/macros/s/AKfycbx0uG2tsQhab97rJrMBtioVbuVLeu5QgmkvdIlgMNBsMUYVAO6e/exec";
+
 let url_fun_time = url + "?fun=Get_end_time";
 //function testGS(){
 
@@ -84,6 +85,8 @@ var x = setInterval(function() {
 //var endtime = "2021-04-23T17:30:45.356Z"
 
 var endtime = tim
+var localendtime = new Date(endtime)
+var localendtime_string = localendtime.toLocaleTimeString()
 var countDownDate = new Date(endtime).getTime();
 
   // Get today's date and time
@@ -104,13 +107,12 @@ var countDownDate = new Date(endtime).getTime();
   lefttime = lefttime + seconds + "s " ; 
 
   // Output the result in an element with id="Timer"
-  document.getElementById("Timer").innerHTML = lefttime;
+  document.getElementById("Timer").innerHTML = "Es sind noch "+ lefttime + "bis zum Bearbeitungsende um "+ localendtime_string;
     
   // If the count down is over, write some text 
   if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("Timer").innerHTML = "Die Zeit ist seit " + endtime + " um!!! Bitte kommt zurück zur Main Area!";
+    document.getElementById("Timer").innerHTML = "Die Zeit ist seit " + localendtime_string + " um!!! Bitte kommt zurück zur Main Area!";
   }
-}, 5000);
 });
+},5000);
 })

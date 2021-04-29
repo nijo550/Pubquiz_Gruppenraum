@@ -47,7 +47,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </style>
 </head>
 <body>
-
+  <button onclick="openForm2()">Antwortsheet</button>
+  <p></p>
+  <button class="open-button" onclick="openForm()" z-factor=2>Video-Chat</button>
+  <div id="Cont2" style="display: block">
+    <div>
+    <iframe ID="Calculation" class="iframe" 
+      src=""
+      style= "height:1500px; border: dashed; border-color: rgb(253, 93, 0);" 
+      allowfullscreen="true"
+      scrolling="yes">
+    </iframe>
 <button class="open-button" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="myForm" >
@@ -66,6 +76,14 @@ function openForm() {
 
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
+}
+function openForm2() {
+  if (document.getElementById("Cont2").style.display == "block")
+  {
+      document.getElementById("Cont2").style.display = "none";
+    }else{
+      document.getElementById("Cont2").style.display = "block";  
+  }
 }
 </script>
 

@@ -81,42 +81,10 @@ div.container {
 
  <!-- </style> -->
 </head>
+
 <!-- Layout -->
 <body >
-  <label >Gruppenraum: </label>
-  <a id="Gruppenraum-nr" >nicht zugewiesen</a>
-  <a >     - verbleibende Bearbeitungszeit: </a>
-  <a id="Timer" align="right">timer noch nicht gestartet</a>
-        <p></p>
-  <button type="button" onclick="A_show()">Antwortsheet</button> 
-  <div id="ASheet">
-    <div>
-      <iframe ID="Calculation" class="iframe" 
-      src=""
-      style= "border: dashed; border-color: rgb(253, 93, 0);" 
-      alt="nicht zugewiesen"
-      allowfullscreen="true"
-      scrolling="yes"></iframe>
-    </div>
-  </div>
-  <p></p>
-  <button type="button" onclick="Z_show()">Zeichnen</button> 
-  <div id="ZSheet">
-    <div>
-      <iframe  ID="Drawing" class="iframe" src=""></iframe>
-    </div>
-  </div>  
-  <p></p>
-  <button type="button" onclick="D_show()">Texten</button> 
-  <div id="DSheet">
-    <div>
-      <iframe ID="Documentation" class="iframe" src=""></iframe>
-    </div>
-  </div> 
-
-  <button class="open-button" onclick="openForm()" z-factor=2>Video-Chat</button>
-  
-  <!--Sidebox-->
+   
   <div class="container" id="mysidebox" align="right">
     <div>
       <iframe ID='Videocall' src=""
@@ -125,19 +93,52 @@ div.container {
       allow="camera; microphone; display-capture"
       allowfullscreen="true" 
       width="100%"
-      height="92%">
+      height="92%"
+      scrolling="yes">
     </iframe>
     </div>
   <button type="button" class="btn_iframe" onclick="longForm()">Videoleiste</button>
     <button type="button" class="btn_iframe" onclick="closeForm()">Ausblenden</button>  
   </div>
-</body>
 
+  <label >Gruppenraum: </label>
+        <a id="Gruppenraum-nr" >nicht zugewiesen</a>
+        <a >     - verbleibende Bearbeitungszeit: </a>
+        <a id="Timer" align="right">timer noch nicht gestartet</a>
+        <p></p>
+        
+        <details open class= "mydetails">  <summary>Antwortsheet</summary>
+          <iframe ID="Calculation" class="iframe" 
+          src=""
+          style= "border: dashed; border-color: rgb(253, 93, 0);" 
+          alt="nicht zugewiesen"
+          allowfullscreen="true"
+          scrolling="yes"></iframe>  
+        </details>
+
+        <p></p>
+        <p>
+          <details class= "mydetails">
+            <summary>Zeichnung</summary>
+            <iframe  ID="Drawing" class="iframe" src=""></iframe>
+        </details>
+      </p>
+      <p></p>
+      <p>
+          <details open class= "mydetails">
+            <summary>Doc</summary>
+            <iframe ID="Documentation" class="iframe" src=""></iframe>
+        </details>
+      </p>
+      <p></p>
+        <button class="open-button" onclick="openForm()" z-factor=2>Video-Chat</button>
+
+</body>
 
 <!-- Parameter aus URL -->
 <script type="text/javascript">  
     function Werteliste (querystring) { //Parameterliste aus Url nach dem ? extrahieren syntax ist ?Parametername0=Wert0&Parametername1=Wert1
-      if (querystring == '') {querystring="?Gruppe=0"};
+      if (querystring == '') return;
       var wertestring = querystring.slice(1);
       var paare = wertestring.split("&");
       var paar, name, wert;
@@ -148,42 +149,18 @@ div.container {
         name = unescape(name).replace("+", " ");
         wert = unescape(wert).replace("+", " ");
         this[name] = wert;
-       // alert(location.search);
+        //alert(location.search);
       }
     }
     var liste = new Werteliste(location.search);
    
 document.getElementById("Gruppenraum-nr").innerHTML = liste["Gruppe"];  
-
-function A_show() {
-  if (document.getElementById("ASheet").style.display == "block")
-  {
-      document.getElementById("ASheet").style.display = "none";
-    }else{
-      document.getElementById("ASheet").style.display = "block";  
-  }
-}
-function Z_show() {
-  if (document.getElementById("ZSheet").style.display == "block")
-  {
-      document.getElementById("ZSheet").style.display = "none";
-    }else{
-      document.getElementById("ZSheet").style.display = "block";  
-  }
-}
-function D_show() {
-  if (document.getElementById("DSheet").style.display == "block")
-  {
-      document.getElementById("DSheet").style.display = "none";
-    }else{
-      document.getElementById("DSheet").style.display = "block";  
-  }
-}
-
 function openForm() {
   document.getElementById("mysidebox").style.display = "block";
 }
-
+function openForm() {
+  document.getElementById("Cont2").style.display = "block";
+}
 function closeForm() {
   document.getElementById("mysidebox").style.display = "none";
 }
@@ -198,11 +175,15 @@ function longForm() {
     document.getElementById("mysidebox").style.width = "43%";
   }
 }
+
 </script>
-
-
 <!-- Auslesen Jit-Talk und Google ID der Dateien -> Zuweisen der iframes mit entsprechenden URLs -->
 
 <script src="Gruppen_config.js" ></script>
+
+<!-- Countdown -->
+
+<!-- <script src="Timer_js.js"></script>-->
+
 
 </html>
