@@ -107,11 +107,11 @@ var countDownDate = new Date(endtime).getTime();
   lefttime = lefttime + seconds + "s " ; 
 
   // Output the result in an element with id="Timer"
-  document.getElementById("Timer").innerHTML = "Es sind noch "+ lefttime + "bis zum Bearbeitungsende um "+ localendtime_string;
+  document.getElementById("Timer").innerHTML = "Bis um " + localendtime_string + " habt Ihr noch "+ lefttime+ " zum Bearbeiten Zeit.";
     
   // If the count down is over, write some text 
   if (distance < 0) {
-    document.getElementById("Timer").innerHTML = "Die Zeit ist seit " + localendtime_string + " um!!! Bitte kommt zurück zur Main Area!";
+    document.getElementById("Timer").innerHTML = "Die Zeit ist seit " +localendtime_string+ " um!!! Bitte kommt zurück zur Main Area!";
   }
 });
 },5000);
