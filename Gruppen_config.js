@@ -87,7 +87,8 @@ fetch(url_fun)
   //document.getElementById("btn").addEventListener("click", testGS);
   // Set the date we're counting down to
   if (isFirefox == true) {
-      document.getElementById("Timer").innerHTML = "Timeranzeige wird von Firefox nicht unterstützt"
+      document.getElementById("Timer").innerHTML = "Timeranzeige wird von Firefox nicht unterstützt! <br>"
+       +"Bevor du dich wieder bewegen kannst, klicke auf den graue Balken, welcher die Bildschirmhälften unterteilt."
    }else{
      time_lesen()  
    }
