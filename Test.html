@@ -59,7 +59,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
       scrolling="yes">
     </iframe>
 <button class="open-button" onclick="openForm()">Chat</button>
-
+</div>
+</div>
 <div class="chat-popup" id="myForm" >
   
 	<form class="form-container">
@@ -70,6 +71,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </div>
 
 <script>
+document.write("Offizieller Name des Browsers: "+ navigator.appName + "<br>");
+document.write("Spitzname des Browsers: " + navigator.appCodeName + "<br>");
+document.write("Version: " + navigator.appVersion +"<br>");
+document.write("HTTP-Identifikation des Browsers: " + navigator.userAgent +"<br>");
+
+
+
+
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
@@ -85,6 +94,8 @@ function openForm2() {
       document.getElementById("Cont2").style.display = "block";  
   }
 }
+
+
 </script>
 
 </body>
