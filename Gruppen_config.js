@@ -1,16 +1,10 @@
-
+// Auslesen welcher Browser verwendet wird
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0; // Opera 8.0+
-
 var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
-
 var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));// Safari 3.0+ "[object HTMLElementConstructor]" 
-
 var isIE = /*@cc_on!@*/false || !!document.documentMode;// Internet Explorer 6-11
-
 var isEdge = !isIE && !!window.StyleMedia;// Edge 20+
-
 var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);// Chrome 1 - 71
-
 var isBlink = (isChrome || isOpera) && !!window.CSS;// Blink engine detection
 
           
@@ -90,51 +84,53 @@ fetch(url_fun)
       document.getElementById("Timer").innerHTML = "Timeranzeige wird von Firefox nicht unterstützt! <br>"
        +"Bevor du dich wieder bewegen kannst, klicke auf den graue Balken, welcher die Bildschirmhälften unterteilt."
    }else{
-     time_lesen()  
+     var Mycountdown = time_lesen() 
+     var wait_time = 5000 //ms
+     Mycountdown = setInterval(time_lesen, wait_time) 
    }
 })
 
 function time_lesen() {
-  let url_fun_time = url + "?fun=Get_end_time";
-  //function testGS(){
-
-  // Update the count down every 5 second
-  var x = setInterval(function() {
+    let url_fun_time = url + "?fun=Get_end_time";
+       
+    // Update the count down every 5 second
+    //var x = setTimeout(function() {
+      
       fetch(url_fun_time)
-      .then(tim => tim.json())
-      .then(tim => {
+        .then(tim => tim.json())
+        .then(tim => {
 
-    //var endtime = "2021-04-23T17:30:45.356Z"
-
-    var endtime = tim
-    var localendtime = new Date(endtime)
-    var localendtime_string = localendtime.toLocaleTimeString()
-    var countDownDate = new Date(endtime).getTime();
-
-    // Get today's date and time
-    var now = new Date().getTime();
+      //var endtime = "2021-04-23T17:30:45.356Z"
       
-    // Find the distance between now and the count down date
-    var distance = countDownDate - now;
-      
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    var lefttime = ""
-    if(days>0){lefttime = days + "d "};
-    if(hours>0){lefttime = lefttime + hours+"h "};
-    if(minutes>0){lefttime = lefttime + minutes + "m "};
-    lefttime = lefttime + seconds + "s " ; 
+      var endtime = tim
+      var localendtime = new Date(endtime)
+      var localendtime_string = localendtime.toLocaleTimeString()
+      var countDownDate = new Date(endtime).getTime();
 
-    // Output the result in an element with id="Timer"
-    document.getElementById("Timer").innerHTML = "Bis um " + localendtime_string + " habt Ihr noch "+ lefttime+ " zum Bearbeiten Zeit.";
-      
-    // If the count down is over, write some text 
-    if (distance < 0) {
-      document.getElementById("Timer").innerHTML = "Die Zeit ist seit " +localendtime_string+ " um!!! Bitte kommt zurück zur Main Area!";
-    }
-  });
-},5000);
+      // Get today's date and time
+      var now = new Date().getTime();
+        
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+        
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      var lefttime = ""
+      if(days>0){lefttime = days + "d "};
+      if(hours>0){lefttime = lefttime + hours+"h "};
+      if(minutes>0){lefttime = lefttime + minutes + "m "};
+      lefttime = lefttime + seconds + "s " ; 
+
+      // Output the result in an element with id="Timer"
+      document.getElementById("Timer").innerHTML = "Bis um " + localendtime_string + " habt Ihr noch "+ lefttime+ " zum Bearbeiten Zeit.";
+        
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        document.getElementById("Timer").innerHTML = "Die Zeit ist seit " +localendtime_string+ " um!!! Bitte kommt zurück zur Main Area!";
+      }
+    });
+  //}, 5000);
 }
