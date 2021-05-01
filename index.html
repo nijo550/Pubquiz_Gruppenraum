@@ -113,7 +113,16 @@ div.container {
       <iframe ID="Documentation" class="iframe" src="" ></iframe>
     </div>
   </div> 
+ 
+  <p><button type="button" onclick="S_show()">Page_Status</button></p>
+  
+  <a id="Page_Status">Gerüst gebaut</a>
+  <p><br></p>
+<script> 
+document.getElementById("ZSheet").style.display = "none";
+document.getElementById("DSheet").style.display = "none";
 
+</script>
   <button class="open-button" onclick="openForm()" z-factor=2>Video-Chat</button>
   
   <!--Sidebox-->
@@ -131,6 +140,8 @@ div.container {
   <button type="button" class="btn_iframe" onclick="longForm()">Videoleiste</button>
     <button type="button" class="btn_iframe" onclick="closeForm()">Ausblenden</button>  
   </div>
+
+
 </body>
 
 
@@ -177,6 +188,15 @@ function D_show() {
       document.getElementById("DSheet").style.display = "none";
     }else{
       document.getElementById("DSheet").style.display = "block";  
+  }
+}
+
+function S_show() {
+  if (document.getElementById("Page_Status").style.display == "block")
+  {
+      document.getElementById("Page_Status").style.display = "none";
+    }else{
+      document.getElementById("Page_Status").style.display = "block";  
   }
 }
 
