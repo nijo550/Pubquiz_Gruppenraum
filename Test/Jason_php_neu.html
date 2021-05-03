@@ -1,0 +1,17 @@
+
+<php?
+
+$contents = file_get_contents('Verstecken.json');
+
+//Decode the JSON data into a PHP array.
+$contentsDecoded = json_decode($contents, true);
+
+//Modify the counter variable.
+$contentsDecoded['counter']++;
+
+//Encode the array back into a JSON string.
+$json = json_encode($contentsDecoded);
+
+//Save the file.
+file_put_contents('Verstecken.json', $json);
+>
