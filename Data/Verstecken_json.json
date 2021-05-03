@@ -1,9 +1,0 @@
-{
-    "Rundenzeit":"21:06:24",
-    "Wartezeit":"00:00:30",
-    "Start_Button_Status":false,
-    "Start_Button_Startzeit":"21:06:22" ,
-    "Team_Sucher":[ "John", "Peter", "Sally", "Jane" ],
-    "Team_Verstecker":[ "VJohn", "VPeter", "VSally", "VJane" ]
-
-}
