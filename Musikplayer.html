@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musikplayer</title>
+<style>
+    
+    body {
+      background-color: #838383;
+      margin: 0em;
+      padding: 0em;
+      width: 100%;
+      height: 100%;
+      font-size: larger;
+      box-sizing: border-box;
+      }
+</style>
+
+</head>
+<body>
+    <h3><label >Songs in 5s</label><br></h3>
+<p>Das sind jeweils die ersten 5s von sehr bekannten Liedern. Welcher Song bzw. Interpret steckt dahinter</p>
+
+<button type="button" onclick="playsong(1)">Song1</button> 
+</body>
+<script>
+var Arr_url = ["https://nijo550.github.io/Pubquiz_Gruppenraum/Data/toilette.mp3","https://nijo550.github.io/Pubquiz_Gruppenraum/Data/toilette.mp3"]
+    function playsong(nr) {
+        url = Arr_url[nr];
+        var audio = new Audio(url);
+        audio.play();
+}
+    </script>
+<a id="output">done</a>
+</html>
