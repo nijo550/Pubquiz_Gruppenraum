@@ -21,22 +21,22 @@
     <h3><label >Songs in 5s</label><br></h3>
 <p>Das sind jeweils die ersten 5s von sehr bekannten Liedern. Welcher Song bzw. Interpret steckt dahinter</p>
 
-<p><button type="button" onclick="playsong(0)">Intro Beispiel</button> </p>
-<p><button type="button" onclick="playsong(1)">Intro A</button> </p>
-<p><button type="button" onclick="playsong(2)">Intro B</button> </p>
-<p><button type="button" onclick="playsong(3)">Intro C</button> </p>
-<p><button type="button" onclick="playsong(4)">Intro D</button> </p>
-<p><button type="button" onclick="playsong(5)">Intro E</button> </p>
-<p><button type="button" onclick="playsong(6)">Intro F</button> </p>
-<p><button type="button" onclick="playsong(7)">Intro G</button> </p>
-<p><button type="button" onclick="playsong(8)">Intro H</button> </p>
+<p><button type="button" onclick="playsong('0')">Intro Beispiel</button> </p>
+<p><button type="button" onclick="playsong('1')">Intro A</button> </p>
+<p><button type="button" onclick="playsong('2')">Intro B</button> </p>
+<p><button type="button" onclick="playsong('3')">Intro C</button> </p>
+<p><button type="button" onclick="playsong('4')">Intro D</button> </p>
+<p><button type="button" onclick="playsong('5')">Intro E</button> </p>
+<p><button type="button" onclick="playsong('6')">Intro F</button> </p>
+<p><button type="button" onclick="playsong('7')">Intro G</button> </p>
+<p><button type="button" onclick="playsong('8')">Intro H</button> </p>
 
 </body>
 <script>
 var Song = ["Intro_Beispiel.m4a","Intro_A.m4a","Intro_B.m4a","Intro_C.m4a","Intro_D.m4a","Intro_E.m4a","Intro_F.m4a","Intro_G.m4a","Intro_H.m4a","Intro_I.m4a"];
 var url = "https://nijo550.github.io/Pubquiz_Gruppenraum/data/";
     function playsong(nr) {
-        url = url + Arr_url[nr];
+        url = url + Song[nr];
         var audio = new Audio(url);
         audio.play();
 }
