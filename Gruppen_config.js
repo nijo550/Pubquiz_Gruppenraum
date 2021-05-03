@@ -97,5 +97,4 @@ fetch(url_fun)
      var wait_time = 5000 //ms
           Mycountdown = setInterval(time_lesen, wait_time) 
    }
-})
-
+});
