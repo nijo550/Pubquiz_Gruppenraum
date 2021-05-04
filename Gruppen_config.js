@@ -9,15 +9,27 @@ var isEdge = !isIE && !!window.StyleMedia;// Edge 20+
 var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);// Chrome 1 - 71
 var isBlink = (isChrome || isOpera) && !!window.CSS;// Blink engine detection
 
-document.getElementById("Page_Status").innerHTML = "Einlesen Gruppen-Tabelle beginn";         
+document.getElementById("Page_Status").innerHTML = "Einlesen Gruppen-Tabelle beginn"; 
+
 let url ="https://script.google.com/macros/s/AKfycbyAxlfLqEFMlDbA3EwarHS_THrRqks2qw3WXV82qbGuJ_EHrCHnD4NFOXMJf_GfDdPUxg/exec" //WEB-Code für des google spreadsheet "Admin-Bereich" dort befindet sich die DoGet(e) funktion
-        let url_fun = url + "?fun=Get_data"
+
 //function testGS(){
+ // let url_fun = url + "?fun=Get_data"
+/*
 fetch(url_fun)
-    .then(Grup => Grup.json())
-    .then(Grup => {
+    .then(Grup =>  
+      Grup.json()
+    ).then(Grup => {
       document.getElementById("Page_Status").innerHTML = "Antwort der Gruppentabelle ist da";
-       var Arr_Gruppe = Grup;
+      alert(Grup);
+      var Arr_Gruppe = Grup;
+*/
+fetch(Import_json_all()).then(Grup =>  {
+      document.getElementById("Page_Status").innerHTML = "Antwort der Gruppentabelle ist da";
+       var Arr_Gruppe = myjsonObj.Gruppenoverview;
+      // alert(Arr_Gruppe);
+
+       
        var JitMeetingLink; //= 'https://meet.jit.si/' + Arr_Gruppe[0][0] +'-Der-Talk#config.startWithAudioMuted=false&config.startWithVideoMuted=false&config.prejoinPageEnabled=false&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false&interfaceConfig.MOBILE_APP_PROMO=false&interfaceConfig.HIDE_INVITE_MORE_HEADER=true&interfaceConfig.SHOW_BRAND_WATERMARK=false&interfaceConfig.SHOW_JITSI_WATERMARK=false&interfaceConfig.SHOW_POWERED_BY=false&interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE=false&interfaceConfig.SHOW_WATERMARK_FOR_GUESTS=false&interfaceConfig.TOOLBAR_BUTTONS=%5B%22microphone%22%2C%22camera%22%2C%22closedcaptions%22%2C%22desktop%22%2C%22fullscreen%22%2C%22fodeviceselection%22%2C%22hangup%22%2C%22profile%22%2C%22chat%22%2C%22recording%22%2C%22livestreaming%22%2C%22etherpad%22%2C%22sharedvideo%22%2C%22settings%22%2C%22raisehand%22%2C%22videoquality%22%2C%22filmstrip%22%2C%22feedback%22%2C%22stats%22%2C%22shortcuts%22%2C%22tileview%22%2C%22videobackgroundblur%22%2C%22download%22%2C%22help%22%2C%22mute-everyone%22%5D%22'
        var DocumentLink; //
        var CalcLink; //
@@ -98,3 +110,5 @@ fetch(url_fun)
           Mycountdown = setInterval(time_lesen, wait_time) 
    }
 });
+
+

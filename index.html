@@ -59,8 +59,8 @@ https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_box-sizing2
   opacity: 0.9;
   bottom: 23px;
   right: 28px;
-  width: 100px;
-  height: 30px;
+  width: 30%;
+  height: 8%;
   z-index: 9;
 }
 div.container {
@@ -134,10 +134,11 @@ document.getElementById("Page_Status").style.display = "none";
       allow="camera; microphone; display-capture"
       allowfullscreen="true" 
       width="100%"
-      height="92%">
+      height="90%">
     </iframe>
     </div>
-  <button type="button" class="btn_iframe" onclick="longForm()">Videoleiste</button>
+    <button type="button" class="btn_iframe" onclick="longForm()">Videoleiste</button>
+    <button type="button" class="btn_iframe" onclick="bigForm()">Groß</button>
     <button type="button" class="btn_iframe" onclick="closeForm()">Ausblenden</button>  
   </div>
 
@@ -201,29 +202,49 @@ function S_show() {
   }
 }
 
+function standForm(){
+  document.getElementById("mysidebox").style.height = "40%";
+  document.getElementById("mysidebox").style.width = "43%";
+  document.getElementById("mysidebox").style.maxWidth = "500px"; 
+  
+}
+
 function openForm() {
   document.getElementById("mysidebox").style.display = "block";
+  standForm();
 }
 
 function closeForm() {
   document.getElementById("mysidebox").style.display = "none";
 }
 
+function bigForm() {
+  if (document.getElementById("mysidebox").style.width != "95%")
+  {
+    document.getElementById("mysidebox").style.maxWidth = "100%";
+    document.getElementById("mysidebox").style.height = "90%";
+    document.getElementById("mysidebox").style.width = "95%";
+    
+  }else{
+    standForm()
+
+  }
+}
+
 function longForm() {
-  if (document.getElementById("mysidebox").style.height == "40%")
+  if (document.getElementById("mysidebox").style.width != "20%")
   {
     document.getElementById("mysidebox").style.height = "90%";
     document.getElementById("mysidebox").style.width = "20%";
   }else{
-    document.getElementById("mysidebox").style.height = "40%";
-    document.getElementById("mysidebox").style.width = "43%";
+    standForm()
   }
 }
 </script>
 
 
 <!-- Auslesen Jit-Talk und Google ID der Dateien -> Zuweisen der iframes mit entsprechenden URLs -->
-
+<script src="json_handle.js" ></script>
 <script src="Gruppen_config.js" ></script>
 <script src="Timer_js.js"></script>
 </html>
