@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Musikplayer</title>
-<style>
-    
-    body {
-      background-color: #838383;
-      margin: 0em;
-      padding: 0em;
-      width: 100%;
-      height: 100%;
-      font-size: larger;
-      box-sizing: border-box;
-      }
-</style>
-
-</head>
-<body>
-    <h3><label >Songs in 5s</label><br></h3>
-<p>Das sind jeweils die ersten 5s von sehr bekannten Liedern. Welcher Song bzw. Interpret steckt dahinter</p>
-
-<p><button type="button" onclick="playsong('0')">Intro Beispiel</button> </p>
-<p><button type="button" onclick="playsong('1')">Intro A</button> </p>
-<p><button type="button" onclick="playsong('2')">Intro B</button> </p>
-<p><button type="button" onclick="playsong('3')">Intro C</button> </p>
-<p><button type="button" onclick="playsong('4')">Intro D</button> </p>
-<p><button type="button" onclick="playsong('5')">Intro E</button> </p>
-<p><button type="button" onclick="playsong('6')">Intro F</button> </p>
-<p><button type="button" onclick="playsong('7')">Intro G</button> </p>
-<p><button type="button" onclick="playsong('8')">Intro H</button> </p>
-
-</body>
-<script>
-var Song = ["Intro_Beispiel.m4a","Intro_A.m4a","Intro_B.m4a","Intro_C.m4a","Intro_D.m4a","Intro_E.m4a","Intro_F.m4a","Intro_G.m4a","Intro_H.m4a","Intro_I.m4a"];
-var url = "https://nijo550.github.io/Pubquiz_Gruppenraum/data/";
-    function playsong(nr) {
-        url = url + Song[nr];
-        var audio = new Audio(url);
-        audio.play();
-}
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Musikplayer</title>
+      <style>
+            
+            body {
+            background-color: #838383;
+            margin: 0em;
+            padding: 0em;
+            width: 100%;
+            height: 100%;
+            font-size: larger;
+            box-sizing: border-box;
+            }
+            audio_player{
+                height : 2px;
+                padding: "none";
+            }
+      </style>
+    </head>
+    <body>
+      <h3><label >Songs in 5s</label><br></h3>
+      <p>Das sind jeweils die ersten 5s von sehr bekannten Liedern. Welcher Song bzw. Interpret steckt dahinter</p>
+      <p id="Audioplayers"></p>
+    </body>
+    <script>
+      var fruits = ["apple", "orange", "cherry"];
+      var url = "https://nijo550.github.io/Pubquiz_Gruppenraum/data/";
+      var Songs = ["intro_beispiel.mp3","intro_a.mp3","intro_b.mp3","intro_c.mp3","intro_d.mp3","intro_e.mp3","intro_f.mp3","intro_g.mp3","intro_h.m4p3"];
+    Songs.forEach(playsong);
+    function playsong(song, index) {
+      document.getElementById("Audioplayers").innerHTML += song + ": " + '<audio class = "audio_player" id="player" controls>'+
+        '<source src="'+url+song+'" type="audio/mpeg">'+
+        'Your browser does not support the audio element.</audio><br><br>';
+    }
     </script>
 </html>
