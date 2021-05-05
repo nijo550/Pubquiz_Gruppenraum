@@ -28,7 +28,7 @@
     <script>
       var fruits = ["apple", "orange", "cherry"];
       var url = "https://nijo550.github.io/Pubquiz_Gruppenraum/data/";
-      var Songs = ["intro_beispiel.mp3","intro_a.mp3","intro_b.mp3","intro_c.mp3","intro_d.mp3","intro_e.mp3","intro_f.mp3","intro_g.mp3","intro_h.m4p3"];
+      var Songs = ["intro_beispiel.mp3","intro_a.mp3","intro_b.mp3","intro_c.mp3","intro_d.mp3","intro_e.mp3","intro_f.mp3","intro_g.mp3","intro_h.mp3"];
     Songs.forEach(playsong);
     function playsong(song, index) {
       document.getElementById("Audioplayers").innerHTML += song + ": " + '<audio class = "audio_player" id="player" controls>'+
