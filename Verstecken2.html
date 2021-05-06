@@ -1,0 +1,272 @@
+<!--Quellen-->
+<!--
+    https://www.w3schools.com/js/js_json_intro.asp
+
+-->
+<html>
+  <!DOCTYPE html>
+
+<!-- Layout -->
+
+<head>
+  <title>Verstecken</title>
+  <style>
+    
+    body {
+      background-color: #838383;
+      margin: 0em;
+      padding: 0em;
+      width: 100%;
+      height: 100%;
+      font-size: larger;
+      box-sizing: border-box;
+      }
+
+  
+    .iframe {
+      height: 80%;
+      width: 99%;
+      display: "none";
+    }
+   
+
+
+/* Button used to open the chat form - fixed at the bottom of the page*/ 
+.open-button {
+  background-color: #555;
+  color: rgb(0, 0, 0);
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 100px;
+  height: 50px;
+}
+
+.btn_iframe {
+  background-color: rgb(61, 61, 61);
+  color: rgb(204, 204, 204);
+  border: 2px;
+  border-style: solid;
+  border-color: aliceblue;
+  cursor: pointer;
+  opacity: 0.9;
+  bottom: 23px;
+  right: 28px;
+  width: 100px;
+  height: 30px;
+  z-index: 9;
+}
+div.container {
+  display: "block";
+  position: fixed;
+  bottom: 15px;
+  right: 25px;
+  width: 43%;
+  max-width: 500px;
+  height: 40%;
+  background-color: #838383;
+  border: 2px solid black;
+  z-index: 8;
+  opacity: 0.95;
+  line-height: 150%
+}
+</style>
+
+
+ <!-- </style> -->
+</head>
+<body >
+    <h2><label >Verstecken</label></h2>
+    
+    <h3><label>Steuerung:</label></h3>
+    <p></p>
+    <p><b><a>Aktuelle Uhrzeit: </a></b><a id="Actu_Time">Uhrzeit wird gleich angezeigt</a></p>
+    <p><b><a>Zeit zum Verstecken: </a></b><a id="Waiting">Noch nicht eingelesen</a><a> Sekunden</a></p>
+    <p><b><a>Start-Button für die Aktuelle Runde wurde gedrückt: </a></b><a id="Button_Status">Noch nicht eingelesen</a></p>
+    <p><b><a>Uhrzeit der Betätigung des Start-Button: </a></b><a id="Button_Time">Noch nicht eingelesen</a></p>  
+    <p><b><a>Start der Suchzeit </a></b><a id="Search_Time_Start">Noch nicht eingelesen</a></p> 
+    <p><b><a>Zeit bis zur Suche </a></b><a id="Search_Time_Diff">Noch nicht eingelesen</a></p>     
+    <p><b><a>Rundenzeitin Minuten: </a></b><a id="Round_Time">Noch nicht eingelesen</a><a> Minuten</a></p>
+    <p><b><a>Spielstatus: </a></b><a id="Game_Status">Noch nicht eingelesen</a></p>
+    <p><b><a>Folgende SUCHER sind dabei: </a></b><a id="Seek_Player">Noch nicht eingelesen</a></p>
+    <p><b><a>Folgende VERSTECKER sind dabei: </a></b><a id="Hide_Player">Noch nicht eingelesen</a></p>
+    
+    <p><b><a>Name: </a></b><input type="text" id="myName" value="Dein Name">
+    <form>
+        <input type="radio" name="choice" value="Seek_Player_choice"> SUCHER
+        <input type="radio" name="choice" value="Hide_Player_choice"> VERSTECKER
+        <button type="button" onclick="Update_Player()">Update Spieler</button>
+    </form>
+  <p><br></p>
+<h3><label>Anleitung</label></h3>
+<p>Teilt euch in "SUCHER und VERSTECKER auf. Dies muss nicht gleichmäßig sein.<br>
+    Ein "SUCHER" klickt auf den Start-Button (Es gibt keine Animation!)	<br>			
+Alle "VERSTECKER" haben nun die Wartezeit teit sich zu Verstecken. Ist nichts anderes Definiert, so ist der Bereich rechts von der Tafel bis zu den Bäumen am Wasser der Versteckbereich. (z.B. hinter Bäume ...)<br>		
+Nach ablauf der Wartezeit springt die Ampel von Rot nach Grün.		<br>
+Nun suchen der/die SUCHER.<br>
+Jemand zählt als Gefunden, wenn ein Video-Call aufgerufen wird.	<br>	
+    - Wegrennen, wenn der Sucher in der Nähe ist,  ist nicht gestattet;<br>
+    - sich zu viert im gleichen Bereich zu verstecken zählt nicht."	<br>	
+Seit ihr gefunden, geht zurück in an die Tafel<br>
+Hat der / Haben die SUCHER alle VERSTECKER gefunden, ist die Spielrunde beendet	<br>	</p>
+<p></p>
+<p><br><br></p>
+
+<p><button type="button" onclick="Import()">Json import</button></p>
+<p><button type="button" onclick="fun_export()">Neuer sucher</button></p>
+<p><button type="button" onclick="S_show()">Page_Status</button></p>
+<a id="Page_Status">Gerüst gebaut</a>
+<!--<script>document.getElementById("Page_Status").style.display = "none";</script>-->
+    <button class="open-button" onclick="openForm()" z-factor=2>Video-Chat</button>
+  
+    <!--Sidebox-->
+    <div class="container" id="mysidebox" align="right">
+      <div>
+        <iframe ID='Videocall' src=""
+        alt="nicht zugewiesen"
+        name="jitsiConferenceFrame1"
+        allow="camera; microphone; display-capture"
+        allowfullscreen="true" 
+        width="100%"
+        height="92%">
+      </iframe>
+      </div>
+    <button type="button" class="btn_iframe" onclick="longForm()">Videoleiste</button>
+      <button type="button" class="btn_iframe" onclick="closeForm()">Ausblenden</button>  
+    </div>
+
+</body>
+
+
+<script>
+    var myjsonObj = {}
+function Update_Player(){
+    document.getElementById("Page_Status").innerHTML = "aktuallisiere Spieler"
+    alert(myjsonObj.Team_Sucher);
+}
+
+function Import() {
+  document.getElementById("Page_Status").innerHTML = "Alle 5s auslesen des Verstecken beginn";  
+  var url = "https://script.google.com/macros/s/AKfycbwY9EG0QY2sN9Xkh5hpHAbIWI2GggXDsO-PfEHAOE7r_oSgLGUQ/exec"
+  var url_fun_seek = url + "?fun=get_hide_seek_data";
+       
+    // Update the count down every 5 second
+      
+      fetch(url_fun_seek)
+        .then(seek => seek.json())
+        .then(seek => {
+          document.getElementById("Page_Status").innerHTML = "Antwort vom Verstecken ist da";
+          var myjsonObj = seek
+          document.getElementById("Waiting").innerHTML = myjsonObj.Wartezeit;
+            document.getElementById("Button_Status").innerHTML = myjsonObj.Start_Button_Status; 
+            document.getElementById("Button_Time").innerHTML = myjsonObj.Start_Button_Zeit; 
+            document.getElementById("Round_Time").innerHTML = myjsonObj.Rundenzeit;
+            document.getElementById("Seek_Player").innerHTML = myjsonObj.Team_Sucher;
+            document.getElementById("Hide_Player").innerHTML = myjsonObj.Team_Verstecker;
+            
+      //var endtime = "2021-04-23T17:30:45.356Z"
+        });
+      };
+
+function fun_export(){
+TEAM_Sucher = "Joh";
+trans_obj= {TEAM_Sucher};
+alert(trans_obj);
+var url = "https://script.google.com/macros/s/AKfycbwY9EG0QY2sN9Xkh5hpHAbIWI2GggXDsO-PfEHAOE7r_oSgLGUQ/exec"
+//var url_fun_seek = url + "?fun=post_Sucher";
+fetch(url,{
+  method: 'POST',
+  mode: 'no-cors',
+  cache:'no-cache',
+  headers: {
+    'Content-Type':'application/json'
+  },
+  redirect: 'follow',
+  body: JSON.stringify(trans_obj)
+});
+
+
+}
+/*
+function Import(){
+    var xmlHttp = null;
+
+  try {
+    xmlHttp = new XMLHttpRequest();
+  } catch(e) {
+    // Fehlerbehandlung, wenn die Schnittstelle vom Browser nicht unterstützt wird.
+    document.getElementById("Page_Status").innerHTML =  "Schnittstelle XMLHttpReqzest wird vom Browser nicht unterstützt";
+  }
+  if (xmlHttp) {
+    xmlHttp.open('GET', 'Verstecken_json.json', true);
+    document.getElementById("Page_Status").innerHTML =  "Antwort Json-Abruf: gestartet";
+    xmlHttp.onreadystatechange = function () {
+        document.getElementById("Page_Status").innerHTML =  "Antwort Json-Abruf: this.readyState="+ this.readyState + "this.Status="+this.status;
+        if (xmlHttp.readyState == 4) {
+            //alert(xmlHttp.responseText);
+            myjsonObj = JSON.parse(this.responseText);
+            document.getElementById("Waiting").innerHTML = myjsonObj.Wartezeit;
+            document.getElementById("Button_Status").innerHTML = myjsonObj.Start_Button_Status; 
+            document.getElementById("Button_Time").innerHTML = myjsonObj.Start_Button_Zeit; 
+            document.getElementById("Round_Time").innerHTML = myjsonObj.Rundenzeit;
+            document.getElementById("Seek_Player").innerHTML = myjsonObj.Team_Sucher;
+            document.getElementById("Hide_Player").innerHTML = myjsonObj.Team_Verstecker;
+           
+        }
+    };
+    xmlHttp.send(null);
+  }
+}
+*/
+var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+  //Import();
+  var Time = new Date();
+  var clock_digital = new Date().getTime();
+  var clock_start = new Date(document.getElementById("Button_Time").innerHTML).getTime();
+  var clock_wait = document.getElementById("Waiting").innerHTML*1000;
+  var ms_search_start =0;
+  ms_search_start = clock_start + clock_wait;
+  var clock_search_start = new Date(ms_search_start);
+  var ms_search_diff = 0;
+  ms_search_diff = clock_search_start - clock_digital;
+  
+  document.getElementById("Actu_Time").innerHTML = Time.toLocaleTimeString();
+  document.getElementById("Search_Time_Start").innerHTML = clock_search_start.toLocaleTimeString();
+  document.getElementById("Search_Time_Diff").innerHTML = Math.round(ms_search_diff/1000,0) + " Sekunden";
+
+  }
+
+function S_show() {
+  if (document.getElementById("Page_Status").style.display == "block")
+  {
+      document.getElementById("Page_Status").style.display = "none";
+    }else{
+      document.getElementById("Page_Status").style.display = "block";  
+  }
+}
+
+function openForm() {
+  document.getElementById("mysidebox").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("mysidebox").style.display = "none";
+}
+
+function longForm() {
+  if (document.getElementById("mysidebox").style.height == "40%")
+  {
+    document.getElementById("mysidebox").style.height = "90%";
+    document.getElementById("mysidebox").style.width = "20%";
+  }else{
+    document.getElementById("mysidebox").style.height = "40%";
+    document.getElementById("mysidebox").style.width = "43%";
+  }
+}
+</script>
