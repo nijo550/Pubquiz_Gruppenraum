@@ -14,15 +14,15 @@
             font-size: larger;
             box-sizing: border-box;
             }
-            audio_player{
-                height : 2px;
+            .audio_player{
+                height : 20px;
                 padding: "none";
             }
       </style>
     </head>
     <body>
       <h3><label >Songs in 5s</label><br></h3>
-      <p>Das sind jeweils die ersten 5s von sehr bekannten Liedern. Welcher Song bzw. Interpret steckt dahinter</p>
+      <p>Das sind jeweils die Intros bis zur ersten Silbe von sehr bekannten Liedern. Welcher Song bzw. Interpret steckt dahinter? Tipp: Stimmt euch gut beim Abspielen ab, sonst höhrt ihr was die anderen gerade abspielen!</p>
       <p id="Audioplayers"></p>
     </body>
     <script>
@@ -31,9 +31,20 @@
       var Songs = ["intro_beispiel.mp3","intro_a.mp3","intro_b.mp3","intro_c.mp3","intro_d.mp3","intro_e.mp3","intro_f.mp3","intro_g.mp3","intro_h.mp3"];
     Songs.forEach(playsong);
     function playsong(song, index) {
-      document.getElementById("Audioplayers").innerHTML += song + ": " + '<audio class = "audio_player" id="player" controls>'+
+      document.getElementById("Audioplayers").innerHTML += '<b>'+song +'</b>'+ ": <br>" + '<audio class = "audio_player" id="player" controls>'+
         '<source src="'+url+song+'" type="audio/mpeg">'+
         'Your browser does not support the audio element.</audio><br><br>';
     }
+
+var audios = document.getElementsByTagName("audio");
+
+document.addEventListener("visibilitychange", function() {
+	if (document.visibilityState != 'visible') {
+	    var i = 0;
+        for (i = 0; i < audios.length; i++) {
+            audios[i].pause();
+        }
+	}
+});
     </script>
 </html>
