@@ -34,11 +34,12 @@ function time_lesen() {
       lefttime = lefttime + seconds + "s " ; 
 
       // Output the result in an element with id="Timer"
-      document.getElementById("Timer").innerHTML = "Bis um " + localendtime_string + " habt Ihr noch "+ lefttime+ " zum Bearbeiten Zeit.";
-        
+      document.getElementById("Timer").innerHTML = "Bis um " + localendtime_string + " habt Ihr noch "+ "<b>"+lefttime+"</b>"+ " zum Bearbeiten Zeit.";
+      document.getElementById("Timer").style.backgroundColor = "green";
       // If the count down is over, write some text 
       if (distance < 0) {
         document.getElementById("Timer").innerHTML = "Die Zeit ist seit " +localendtime_string+ " um!!! Bitte kommt zurück zur Main Area!";
+        document.getElementById("Timer").style.backgroundColor = "red";
       }
       document.getElementById("Page_Status").innerHTML = "Timer wurde belegt";  
     });

@@ -74,6 +74,43 @@ div.container {
   opacity: 0.95;
   line-height: 150%
 }
+table,
+th,
+td,
+caption {
+  border: thin solid #838383;
+}
+
+table {
+  background-color: #838383;
+  border-collapse: collpase;
+  border-spacing: 0;
+  border-width: thin 0 0 thin;
+  margin: 0 0 1em;
+  table-layout: auto;
+  /* Prevents HTML tables from becoming too wide */
+  max-width: 100%;
+}
+
+th, td {
+  font-weight: normal;
+  text-align: left;
+}
+
+th, caption {
+  background-color: #5e5d5d;
+  font-weight: 700;
+}
+
+/*th, td, caption {
+  padding: .4em .6em;
+}
+*/
+caption {
+  text-align: center;
+  border-width: thin thin 0 thin;
+}
+
 </style>
 
 
@@ -83,24 +120,28 @@ div.container {
     <h2><label >Verstecken</label></h2>
     
     <h3><label>Steuerung:</label></h3>
-    <p></p>
-    <p><b><a>Aktuelle Uhrzeit: </a></b><a id="Actu_Time">Uhrzeit wird gleich angezeigt</a></p>
-    <p><b><a>Zeit zum Verstecken: </a></b><a id="Waiting">Noch nicht eingelesen</a><a> Sekunden</a></p>
-    <p><b><a>Start-Button für die Aktuelle Runde wurde gedrückt: </a></b><a id="Button_Status">Noch nicht eingelesen</a></p>
-    <p><b><a>Uhrzeit der Betätigung des Start-Button: </a></b><a id="Button_Time">Noch nicht eingelesen</a></p>  
-    <p><b><a>Start der Suchzeit </a></b><a id="Search_Time_Start">Noch nicht eingelesen</a></p> 
-    <p><b><a>Zeit bis zur Suche </a></b><a id="Search_Time_Diff">Noch nicht eingelesen</a></p>     
-    <p><b><a>Rundenzeitin Minuten: </a></b><a id="Round_Time">Noch nicht eingelesen</a><a> Minuten</a></p>
-    <p><b><a>Spielstatus: </a></b><a id="Game_Status">Noch nicht eingelesen</a></p>
-    <p><b><a>Folgende SUCHER sind dabei: </a></b><a id="Seek_Player">Noch nicht eingelesen</a></p>
-    <p><b><a>Folgende VERSTECKER sind dabei: </a></b><a id="Hide_Player">Noch nicht eingelesen</a></p>
-    
+    <table>
+      <tbody>
+        <tr><th><a>Aktuelle Uhrzeit: </a></th><td><a id="Actu_Time">Uhrzeit wird gleich angezeigt</a></td></tr>
+        <tr><th><a>Zeit zum Verstecken: </a></b></th><td><a id="Waiting">Noch nicht eingelesen</a><a> Sekunden</a></td></tr>
+        <tr><th><a>Start-Button für die Aktuelle Runde wurde gedrückt: </a></th><td><a id="Button_Status">Noch nicht eingelesen</a></td></tr>
+        <tr><th><a>Uhrzeit der Betätigung des Start-Button: </a></th><td><a id="Button_Time">Noch nicht eingelesen</a></td></tr>  
+        <tr><th><a>Start der Suchzeit </a></th><td><a id="Search_Time_Start">Noch nicht eingelesen</a></td></tr>
+        <tr><th><a>Zeit bis zur Suche </a></th><td><a id="Search_Time_Diff">Noch nicht eingelesen</a></td></tr>  
+        <tr><th><a>Rundenzeitin Minuten: </a></th><td><a id="Round_Time">Noch nicht eingelesen</a><a> Minuten</a></td></tr>
+        <tr><th><a>Ende der Runde: </a></th><td><a id="Round_Finished">Noch nicht eingelesen</a><a> Minuten</a></td</tr>
+        <tr><th><a>Spielstatus: </a></th><td><a id="Game_Status">Noch nicht eingelesen</a></td></tr>
+        <tr><th><a>Folgende SUCHER sind dabei: </a></th><td><a id="Seek_Player">Noch nicht eingelesen</a></td></tr>
+        <tr><th><a>Folgende VERSTECKER sind dabei: </a></th><td><a id="Hide_Player">Noch nicht eingelesen</a></td></tr>
+      </tbody>
+    </table>  
     <p><b><a>Name: </a></b><input type="text" id="myName" value="Dein Name">
     <form>
         <input type="radio" name="choice" value="Seek"> SUCHER
         <input type="radio" name="choice" value="Hide"> VERSTECKER
         <button type="button" onclick="Update_Player()">Update Spieler</button>
-        <button type="button" onclick="GO()">Start-Button</button>
+        <button type="button" onclick="GO(true)">Start-Button</button>
+        <button type="button" onclick="Reset()">Reset</button>
     </form>
   <p><br></p>
 <h3><label>Anleitung</label></h3>
@@ -144,7 +185,7 @@ Hat der / Haben die SUCHER alle VERSTECKER gefunden, ist die Spielrunde beendet	
 
 
 <script>
-  JitMeetingLink = 'https://meet.jit.si/'+'Verstecken'+'-Der-Talk#config.startWithAudioMuted=false'
+  JitMeetingLink = 'https://meet.jit.si/'+'Verstecken'+'-Der-Talk#config.startWithAudioMuted=false'+
     '&config.startWithVideoMuted=false'+
     '&config.prejoinPageEnabled=false'+
     '&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false'+
@@ -208,8 +249,14 @@ function  Update_Player(){
   fun_export(trans_obj);
 }
 
-function GO(){
-  var Start_Button_Status = true;
+function Reset() {
+  GO(false);
+  TEAM_Sucher = "Reset_Reset";
+  trans_obj = {TEAM_Sucher};
+}
+
+function GO(Status_B){
+  var Start_Button_Status = Status_B;
   trans_obj = {Start_Button_Status}; 
   fun_export(trans_obj);
 
@@ -221,9 +268,7 @@ function Import() {
   document.getElementById("Page_Status").innerHTML = "Alle 5s auslesen des Verstecken beginn";  
   var url = "https://script.google.com/macros/s/AKfycbwY9EG0QY2sN9Xkh5hpHAbIWI2GggXDsO-PfEHAOE7r_oSgLGUQ/exec"
   var url_fun_seek = url + "?fun=get_hide_seek_data";
-       
     // Update the count down every 5 second
-      
       fetch(url_fun_seek)
         .then(seek => seek.json())
         .then(seek => {
@@ -235,7 +280,6 @@ function Import() {
             document.getElementById("Round_Time").innerHTML = myjsonObj.Rundenzeit;
             document.getElementById("Seek_Player").innerHTML = myjsonObj.Team_Sucher;
             document.getElementById("Hide_Player").innerHTML = myjsonObj.Team_Verstecker;
-            
       //var endtime = "2021-04-23T17:30:45.356Z"
         });
       };
@@ -294,18 +338,44 @@ function myTimer() {
   var Time = new Date();
   var clock_digital = new Date().getTime();
   var clock_start = new Date(document.getElementById("Button_Time").innerHTML).getTime();
-  var clock_wait = document.getElementById("Waiting").innerHTML*1000;
-  var ms_search_start =0;
-  ms_search_start = clock_start + clock_wait;
+  var ms_wait = document.getElementById("Waiting").innerHTML*1000;
+  var ms_round = document.getElementById("Round_Time").innerHTML*1000*60
+  var ms_round_finished = 0;
+  var ms_search_start = 0;
+  
+  
+  ms_search_start = clock_start + ms_wait;
+  ms_round_finished = clock_start + ms_round;
+
   var clock_search_start = new Date(ms_search_start);
+  var clock_round_finished = new Date(ms_round_finished);
   var ms_search_diff = 0;
   ms_search_diff = clock_search_start - clock_digital;
-  
+
+  if (ms_search_diff > 0)
+  {
+    document.getElementById("Game_Status").innerHTML = "Versteckt euch!!!";
+    document.getElementById("Game_Status").style.backgroundColor = "yellow";
+  }else{
+    document.getElementById("Game_Status").innerHTML = "Auf gehts SUCHER";
+    document.getElementById("Game_Status").style.backgroundColor = "green";
+  }  
+
+  if (clock_digital > ms_round_finished || document.getElementById("Button_Status").innerHTML == false)
+  {
+    document.getElementById("Button_Status").innerHTML = false
+    document.getElementById("Game_Status").innerHTML = "Zum Starten der Spielrunde Start-Button drücken";
+    document.getElementById("Game_Status").style.backgroundColor = "red";
+    GO(false);
+  }
+
+
   document.getElementById("Actu_Time").innerHTML = Time.toLocaleTimeString();
   document.getElementById("Search_Time_Start").innerHTML = clock_search_start.toLocaleTimeString();
   document.getElementById("Search_Time_Diff").innerHTML = Math.round(ms_search_diff/1000,0) + " Sekunden";
-
-  }
+  document.getElementById("Round_Finished").innerHTML = clock_round_finished.toLocaleTimeString();
+  
+}
 
 function S_show() {
   if (document.getElementById("Page_Status").style.display == "block")
@@ -320,7 +390,6 @@ function standForm(){
   document.getElementById("mysidebox").style.height = "40%";
   document.getElementById("mysidebox").style.width = "43%";
   document.getElementById("mysidebox").style.maxWidth = "500px"; 
-  
 }
 
 function openForm() {
@@ -338,10 +407,8 @@ function bigForm() {
     document.getElementById("mysidebox").style.maxWidth = "100%";
     document.getElementById("mysidebox").style.height = "90%";
     document.getElementById("mysidebox").style.width = "95%";
-    
   }else{
     standForm()
-
   }
 }
 
