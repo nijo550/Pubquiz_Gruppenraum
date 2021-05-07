@@ -138,23 +138,30 @@ caption {
     <p><b><a>Name: </a></b><input type="text" id="myName" value="Dein Name">
     <form>
         <input type="radio" name="choice" value="Seek"> SUCHER
-        <input type="radio" name="choice" value="Hide"> VERSTECKER
+        <input type="radio" name="choice" value="Hide" checked="true"> VERSTECKER
         <button type="button" onclick="Update_Player()">Update Spieler</button>
-        <button type="button" onclick="GO(true)">Start-Button</button>
-        <button type="button" onclick="Reset()">Reset</button>
+         <p> <button type="button" onclick="GO(true)">Start-Button</button>
+        <button type="button" onclick="Reset()">Reset</button></p>
     </form>
   <p><br></p>
 <h3><label>Anleitung</label></h3>
-<p>Teilt euch in "SUCHER und VERSTECKER auf. Dies muss nicht gleichmäßig sein.<br>
-    Ein "SUCHER" klickt auf den Start-Button (Es gibt keine Animation!)	<br>			
-Alle "VERSTECKER" haben nun die Wartezeit teit sich zu Verstecken. Ist nichts anderes Definiert, so ist der Bereich rechts von der Tafel bis zu den Bäumen am Wasser der Versteckbereich. (z.B. hinter Bäume ...)<br>		
-Nach ablauf der Wartezeit springt die Ampel von Rot nach Grün.		<br>
-Nun suchen der/die SUCHER.<br>
-Jemand zählt als Gefunden, wenn ein Video-Call aufgerufen wird.	<br>	
-    - Wegrennen, wenn der Sucher in der Nähe ist,  ist nicht gestattet;<br>
-    - sich zu viert im gleichen Bereich zu verstecken zählt nicht."	<br>	
-Seit ihr gefunden, geht zurück in an die Tafel<br>
-Hat der / Haben die SUCHER alle VERSTECKER gefunden, ist die Spielrunde beendet	<br>	</p>
+<table>
+  <tbody>
+    <tr><th>1. </th><td> Geb deinen Namen in das Textfeld ein.</td></tr>
+    <tr><th>2. </th><td> Teilt euch in "SUCHER und VERSTECKER auf. Dies muss nicht gleichmäßig sein.</td></tr>
+    <tr><th>3. </th><td> Wenn du SUCHER bist wähle SUCHER aus. Wenn du VERSTECKER bist dann wähle VERSTECKER aus.</td></tr>
+    <tr><th>4. </th><td> Ein "SUCHER" klickt auf den Start-Button. Der Spielstatus welchselt nach Gelb.</td></tr>			
+    <tr><th>5. </th><td> Alle "VERSTECKER" haben nun die Wartezeit teit sich zu Verstecken. Ist nichts anderes Definiert, so ist der Bereich rechts von der Tafel bis zu den Bäumen am Wasser der Versteckbereich. (z.B. hinter Bäume ...)</td></tr>	
+    <tr><th>6. </th><td>Nach Ablauf der Wartezeit für die SUCER springt der Spielstatus von Gelb nach Grün.</td></tr>
+    <tr><th>7. </th><td>Nun suchen der/die SUCHER.</td></tr>
+    <tr><th></th><td>Du bist gefunden, wenn ein Video-Call von einem SUCHER aufgerufen wird.</td></tr>
+    <tr><th></th><td>    - Wegrennen, wenn der Sucher in der Nähe ist,  ist nicht gestattet;</td></tr>
+    <tr><th></th><td>    - sich zu viert im gleichen Bereich zu verstecken zählt nicht."	</td></tr>
+    <tr><th></th><td>Seit ihr gefunden, geht zurück in an die Tafel</td></tr>
+    <tr><th>8. </th><td>Hat der / Haben die SUCHER alle VERSTECKER gefunden, ist die Spielrunde beendet.</td></tr>
+    <tr><th>9. </th><td>Mit dem Button Reset wird die aktuelle Runde beendet und die Teams gelöscht.</td></tr>	
+  </tbody>
+</table>  
 <p></p>
 <p><br><br></p>
 
@@ -162,7 +169,7 @@ Hat der / Haben die SUCHER alle VERSTECKER gefunden, ist die Spielrunde beendet	
 <p><button type="button" onclick="Update_Player()">Update Spieler</button></p>
 <p><button type="button" onclick="S_show()">Page_Status</button></p>
 <a id="Page_Status">Gerüst gebaut</a>
-<!--<script>document.getElementById("Page_Status").style.display = "none";</script>-->
+<script>document.getElementById("Page_Status").style.display = "none";</script>
     <button class="open-button" onclick="openForm()" z-factor=2>Video-Chat</button>
 
       <div class="container" id="mysidebox" align="right">
@@ -253,6 +260,7 @@ function Reset() {
   GO(false);
   TEAM_Sucher = "Reset_Reset";
   trans_obj = {TEAM_Sucher};
+  fun_export(trans_obj);
 }
 
 function GO(Status_B){
@@ -300,38 +308,8 @@ fetch(url,{
     body: JSON.stringify(trans_obj)
   });
 }
-/*
-function Import(){
-    var xmlHttp = null;
 
-  try {
-    xmlHttp = new XMLHttpRequest();
-  } catch(e) {
-    // Fehlerbehandlung, wenn die Schnittstelle vom Browser nicht unterstützt wird.
-    document.getElementById("Page_Status").innerHTML =  "Schnittstelle XMLHttpReqzest wird vom Browser nicht unterstützt";
-  }
-  if (xmlHttp) {
-    xmlHttp.open('GET', 'Verstecken_json.json', true);
-    document.getElementById("Page_Status").innerHTML =  "Antwort Json-Abruf: gestartet";
-    xmlHttp.onreadystatechange = function () {
-        document.getElementById("Page_Status").innerHTML =  "Antwort Json-Abruf: this.readyState="+ this.readyState + "this.Status="+this.status;
-        if (xmlHttp.readyState == 4) {
-            //alert(xmlHttp.responseText);
-            myjsonObj = JSON.parse(this.responseText);
-            document.getElementById("Waiting").innerHTML = myjsonObj.Wartezeit;
-            document.getElementById("Button_Status").innerHTML = myjsonObj.Start_Button_Status; 
-            document.getElementById("Button_Time").innerHTML = myjsonObj.Start_Button_Zeit; 
-            document.getElementById("Round_Time").innerHTML = myjsonObj.Rundenzeit;
-            document.getElementById("Seek_Player").innerHTML = myjsonObj.Team_Sucher;
-            document.getElementById("Hide_Player").innerHTML = myjsonObj.Team_Verstecker;
-           
-        }
-    };
-    xmlHttp.send(null);
-  }
-}
-*/
-var myVar = setInterval(myTimer, 1000);
+var myVar = setInterval(myTimer, 2000);
 
 function myTimer() {
   Import();
@@ -361,15 +339,21 @@ function myTimer() {
     document.getElementById("Game_Status").style.backgroundColor = "green";
   }  
 
-  if (clock_digital > ms_round_finished || document.getElementById("Button_Status").innerHTML == false)
+  if (clock_digital > ms_round_finished) 
   {
-    document.getElementById("Button_Status").innerHTML = false
-    document.getElementById("Game_Status").innerHTML = "Zum Starten der Spielrunde Start-Button drücken";
-    document.getElementById("Game_Status").style.backgroundColor = "red";
-    GO(false);
+    //alert(document.getElementById("Button_Status").innerHTML);
+    if (document.getElementById("Button_Status").innerHTML == "true")
+    {
+      GO("false");
+      document.getElementById("Button_Status").innerHTML = false
+    }    
   }
 
-
+  if (document.getElementById("Button_Status").innerHTML == "false") 
+  {
+    document.getElementById("Game_Status").innerHTML = "Zum Starten der Spielrunde Start-Button drücken";
+    document.getElementById("Game_Status").style.backgroundColor = "red";
+  }  
   document.getElementById("Actu_Time").innerHTML = Time.toLocaleTimeString();
   document.getElementById("Search_Time_Start").innerHTML = clock_search_start.toLocaleTimeString();
   document.getElementById("Search_Time_Diff").innerHTML = Math.round(ms_search_diff/1000,0) + " Sekunden";
